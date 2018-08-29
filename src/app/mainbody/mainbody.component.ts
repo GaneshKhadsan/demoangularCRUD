@@ -57,6 +57,7 @@ export class MainbodyComponent implements OnInit {
       //update existing student
     }
     this.studentForm = false;
+    
   }
   removeStudent(index: number):void{
     this.students.splice(index,1);

@@ -16,6 +16,7 @@ export class StudentService {
   addStudent(student: Student){
     this.sData.push(student);
     console.log(this.sData);
+    alert("Student Dtails Inserted Successfully...!!");
 
   }
   
