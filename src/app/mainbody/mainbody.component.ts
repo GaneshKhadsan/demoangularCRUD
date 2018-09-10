@@ -1,6 +1,9 @@
+
+import { STUDENT_DETAILS } from './../student-data';
 import { Student } from '../Student';
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
+
 
 
 @Component({
@@ -21,14 +24,15 @@ export class MainbodyComponent implements OnInit {
    this.getStudents();  
   }
  
+ 
    /* getStudents(){
     this.students = this._studentService.getStudentsFromService();
   }  */
 
   getStudents(){
     this.students = this._studentService.getStudentsFromData();
+    
   } 
-
   showEditStudentForm(student: Student){
     if(!student){
       this.studentForm = false;
@@ -49,6 +53,11 @@ export class MainbodyComponent implements OnInit {
     this.isNewForm = true;
   }
 
+  removeStudent(index: number):void{
+    this.students.splice(index,1);
+
+  }
+  
   saveStudent(student: Student){
     if(this.isNewForm){
       //add new student
@@ -59,12 +68,15 @@ export class MainbodyComponent implements OnInit {
     this.studentForm = false;
     
   }
-  removeStudent(index: number):void{
-    this.students.splice(index,1);
-
-  }
+  
   cancelNewStudent(){
     this.newStudent={};
     this.studentForm = false;
+   
+  }
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      console.log(event);
+    }
   }
 }

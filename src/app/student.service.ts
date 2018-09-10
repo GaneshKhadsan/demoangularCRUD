@@ -8,7 +8,7 @@ export class StudentService {
   private sData = STUDENT_DETAILS;
   
   getStudentsFromData(): Student[]{
-    console.log(this.sData);
+    /* console.log(this.sData); */
     return this.sData;
 
   }
@@ -16,15 +16,13 @@ export class StudentService {
   addStudent(student: Student){
     this.sData.push(student);
     console.log(this.sData);
-    alert("Student Dtails Inserted Successfully...!!");
+     /* localStorage.setItem('student', JSON.stringify(this.sData)); */
+
+    alert("Student Details Inserted Successfully...!!");
 
   }
   
 }
-
-
-
-
 
   /* 
 

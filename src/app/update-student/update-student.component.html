@@ -1,0 +1,58 @@
+<div class="container">
+  <div class ="col-md-12">
+    
+<form  #studentForm="ngForm">
+
+  <table cellpadding="2" width="20%" align="center"
+   cellspacing="2" border=1>
+   <tr>
+   <td colspan=2 align="center">
+   <font size=2><b>Update Student Details Here....!</b></font>
+   </td>
+   </tr>
+       
+   <tr>
+            <td>
+              <label for="name"> Name </label> 
+            </td>
+            <td>  
+              <input type="text" class="form-control" name="name" #username ="ngModel" [(ngModel)]="newStudent.name" required>         
+           </td>
+   </tr>
+   
+
+  
+   <tr>
+   <td>EmailId</td>
+   <td>
+     <input type="email" class="form-control" name ="email" #email ="ngModel" [(ngModel)]="newStudent.email" [email]="true" required></td>
+   </tr>
+    
+   <tr>
+   <td>Phone</td>
+   <td><input type="tel" class="form-control" name="phone" #phone ="ngModel" [(ngModel)]="newStudent.phone" minlength="5" maxlength="10" required ></td>
+   </tr>
+
+   <tr>
+      <td>DOB</td>
+      <td><input type="date" class="form-control" name="dob" #dob ="ngModel" [(ngModel)]="newStudent.dob" required></td>
+   </tr>
+      
+   <tr>
+   <td><button type="reset" class="btn btn-warning" (click)="cancelNewStudent();">Cancel</button></td>
+   <td colspan="2">    
+     <button type="button" class="btn btn-primary" [disabled]="!studentForm.form.valid" (click)="updateStudent(this.newStudent)" >Submit</button>
+   </td>
+   </tr>
+
+ </table>
+ <p *ngIf="username.invalid">Name should not be empty.</p>
+ <p *ngIf="email.errors">Invalid email id.</p>
+ <p *ngIf="phone.errors">Enter valid phone no. </p>
+ <p *ngIf="dob.invalid">Enter valid Date of Birth.</p>
+
+
+ </form>
+
+ </div>
+ </div>

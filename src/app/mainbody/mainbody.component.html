@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 <body>
+
   <div class="container">
   <div class ="col-md-12">
     <h2>Student List</h2>
@@ -24,9 +25,9 @@
             <td> {{student.dob | date}}</td>
         
             <td>
-              <button class="btn btn-info" (click)="showEditStudentForm(student)">
+             <!--  <a class="active" routerLink="updatestudent">  --><button class="btn btn-info" (click)="showEditStudentForm(student)">
                   <i class="fa fa-edit"></i>
-              </button>
+              </button><!-- </a> -->
               &nbsp; &nbsp;
               <button class="btn btn-danger" (click)="removeStudent(i)"> 
                  <i class="fa fa-minus"></i>
@@ -35,54 +36,62 @@
           </tr>
         </tbody>
       </table>
-     <button class="btn btn-success" (click)="showAddStudentForm()"> <i class="fa fa-plus"></i></button>
+      <button routerLink="addstudent"  routerLinkActive="active" class="btn btn-success" (click)="showAddStudentForm()"> <i class="fa fa-plus"></i></button>
+      
+      <form *ngIf="studentForm" #studentForm="ngForm">
 
-          <form *ngIf="studentForm">
-
-              <table cellpadding="2" width="20%" align="center"
-               cellspacing="2" border=1>
-               <tr>
-               <td colspan=2 align="center">
-               <font size=2><b>Please Add Student Details Here....!</b></font>
-               </td>
-               </tr>
-                   
-               <tr>
-                        <td>
-                          <label for="name"> Name </label> 
-                        </td>
-                        <td>  
-                          <input type="text" name="name" [(ngModel)]="newStudent.name">         
-                       </td>
-               </tr>
-               
+        <table cellpadding="2" width="20%" align="center"
+         cellspacing="2" border=1>
+         <tr>
+         <td colspan=2 align="center">
+         <font size=2><b>Update Student Details Here....!</b></font>
+         </td>
+         </tr>
+             
+         <tr>
+                  <td>
+                    <label for="name"> Name </label> 
+                  </td>
+                  <td>  
+                    <input type="text" class="form-control" name="name" #username ="ngModel" [(ngModel)]= "newStudent.name"  required>         
+                 </td>
+         </tr>
+         
+    
+        
+         <tr>
+         <td>EmailId</td>
+         <td>
+           <input type="email" class="form-control" name ="email" #email ="ngModel" [(ngModel)]="newStudent.email" [email]="true" required></td>
+         </tr>
           
-              
-               <tr>
-               <td>EmailId</td>
-               <td>
-                 <input type="email" name ="email" [(ngModel)]="newStudent.email"></td>
-               </tr>
-                
-               <tr>
-               <td>Phone</td>
-               <td><input type="number" name="phone" [(ngModel)]="newStudent.phone"></td>
-               </tr>
+         <tr>
+         <td>Phone</td>
+         <td><input type="tel" class="form-control" name="phone" #phone ="ngModel" [(ngModel)]="newStudent.phone" minlength="5" maxlength="10" required ></td>
+         </tr>
 
-               <tr>
-                  <td>DOB</td>
-                  <td><input type="date" name="dob" [(ngModel)]="newStudent.dob"></td>
-               </tr>
-                  
-               <tr>
-               <td><button type="reset" class="btn btn-warning" (click)="cancelNewStudent();">Cancel</button></td>
-               <td colspan="2">    
-                 <button type="button" class="btn btn-primary" (click)="saveStudent(newStudent)">Submit</button>
-               </td>
-               </tr>
+         <tr>
+            <td>DOB</td>
+            <td><input type="date" class="form-control" name="dob" #dob ="ngModel" [(ngModel)]="newStudent.dob" required></td>
+         </tr>
+            
+         <tr>
+         <td><button type="button" class="btn btn-warning" [disabled]="!studentForm.form.valid" (click)="cancelNewStudent();">Cancel</button></td>
+         <td colspan="2">    
+           <button type="submit" class="btn btn-primary" [disabled]="!studentForm.form.valid" (click)="saveStudent(newStudent)" (keydown)="onKeydown($event)">Submit</button>
+         </td>
+         </tr>
 
-             </table>
-             </form>
+       </table>
+       <p *ngIf="username.invalid">Name should not be empty.</p>
+       <p *ngIf="email.errors">Invalid email id.</p>
+       <p *ngIf="phone.errors">Enter valid phone no. </p>
+       <p *ngIf="dob.invalid">Enter valid Date of Birth.</p>
+
+
+       </form>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
-  </div> 
+  </div>  
+ 
 </body>     
