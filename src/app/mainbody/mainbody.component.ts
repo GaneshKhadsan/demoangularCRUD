@@ -66,7 +66,7 @@ export class MainbodyComponent implements OnInit {
       //update existing student
     }
     this.studentForm = false;
-    
+    this.newStudent = student;
   }
   
   cancelNewStudent(){
